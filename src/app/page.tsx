@@ -246,11 +246,14 @@ export default function Home() {
                 variants={itemVariants}
                 className="py-8 lg:py-12"
               >
-                <div className="grid lg:grid-cols-[100px_1fr] gap-8 items-start">
-                  <span className="font-mono text-5xl lg:text-7xl font-bold text-text-3 opacity-10">{item.num}</span>
-                  <div>
+                <div className="grid lg:grid-cols-[80px_1fr] gap-6 items-start">
+                  <div className="flex flex-col items-start">
+                    <span className="font-mono text-3xl font-bold text-orange leading-none">{item.num}</span>
+                    <span className="w-8 h-px bg-orange mt-2" />
+                  </div>
+                  <div className="pt-1">
                     <p className="text-sm text-text-3 italic mb-2">{item.before}</p>
-                    <p className="font-sans text-xl font-bold">{item.after}</p>
+                    <p className="font-sans text-lg lg:text-xl font-bold">{item.after}</p>
                   </div>
                 </div>
               </motion.div>
