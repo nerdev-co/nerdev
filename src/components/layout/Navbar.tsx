@@ -36,8 +36,8 @@ export function Navbar() {
     >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center font-mono text-xl font-bold tracking-tight">
-            nerdev<span className="text-orange cursor-blink">▋</span>
+          <Link href="/" className="flex items-center">
+            <img src="/logo.svg" alt="nerdev" className="h-7 w-auto" />
           </Link>
           
           <div className="hidden lg:flex items-center gap-8">
