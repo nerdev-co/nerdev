@@ -34,6 +34,15 @@ const team = [
     bio: 'ML/AI engineer. Former Fortune 500. I build systems that make products intelligent — LLMs, agents, automation pipelines that actually work in production.',
     stack: 'Python · LangChain · OpenAI · FastAPI · TensorFlow · AWS',
   },
+  {
+    num: '03',
+    role: 'SOFTWARE ENGINEER',
+    roleColor: 'var(--green)',
+    name: 'Muskan Wagh',
+    bio: 'Full-stack developer with a passion for building intuitive user experiences. Focused on React, Next.js, and modern web technologies.',
+    stack: 'React · Next.js · TypeScript · Node.js · PostgreSQL',
+    github: 'https://github.com/Muskan-wagh',
+  },
 ];
 
 const values = [
@@ -55,7 +64,7 @@ export default function AboutPage() {
         <motion.div variants={itemVariants} className="mb-20 lg:mb-32">
           <span className="font-mono text-xs text-text-3 tracking-wider uppercase">// WHO WE ARE</span>
           <h1 className="font-sans text-4xl lg:text-6xl font-black mt-4 leading-[0.9] tracking-tight">
-            Two engineers. <br />
+            Three engineers. <br />
             One studio. <br />
             Zero middlemen.
           </h1>
