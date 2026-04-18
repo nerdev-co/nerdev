@@ -274,6 +274,35 @@ export default function Home() {
           <ShipLog />
         </div>
       </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-surface">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-12">
+            <span className="font-mono text-xs text-text-3 tracking-wider uppercase">// WORDS FROM CLIENTS</span>
+            <h2 className="font-sans text-3xl lg:text-4xl font-black mt-4 leading-tight">
+              Don't take our word for it.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-bg border border-border p-6">
+              <p className="text-base text-text-2 italic mb-6">"nerdev didn't just build our product—they understood the vision. Delivered in 6 weeks what other shops promised in 6 months."</p>
+              <div className="border-t border-border pt-4">
+                <p className="font-bold">Sarah Chen</p>
+                <p className="font-mono text-xs text-text-3">CEO, Fintech Startup</p>
+              </div>
+            </div>
+            <div className="bg-bg border border-border p-6">
+              <p className="text-base text-text-2 italic mb-6">"Finally, developers who actually ship. No scope creep, no drama. Just clean code and on-time delivery. Already hiring them for round two."</p>
+              <div className="border-t border-border pt-4">
+                <p className="font-bold">Marcus Webb</p>
+                <p className="font-mono text-xs text-text-3">Founder, Logistics Platform</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       
       {/* TECH STACK CONFIGURATOR */}
       <section className="py-20 lg:py-32 px-6 lg:px-12 bg-surface">
