@@ -6,38 +6,28 @@ interface MarqueeStripProps {
   items: string[];
 }
 
-const MarqueeStrip = ({ items = [] }: MarqueeStripProps) => {
-  const content = items.join('  ·  ');
-
+export function MarqueeStrip({ items = [] }: MarqueeStripProps) {
   return (
     <div className="relative flex overflow-hidden bg-orange w-full h-11 items-center">
       <motion.div
         className="flex whitespace-nowrap"
-        animate={{ x: ['0%', '-50%'] }}
+        animate={{ x: ['0%', '-25%'] }}
         transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: 'loop',
-            duration: 20,
-            ease: 'linear',
-          },
+          repeat: Infinity,
+          repeatType: 'loop',
+          duration: 25,
+          ease: 'linear',
         }}
       >
-        <span className="font-mono text-xs font-bold text-white uppercase tracking-wider px-4">
-          {content}
-        </span>
-        <span className="font-mono text-xs font-bold text-white uppercase tracking-wider px-4" aria-hidden="true">
-          {content}
-        </span>
-        <span className="font-mono text-xs font-bold text-white uppercase tracking-wider px-4" aria-hidden="true">
-          {content}
-        </span>
-        <span className="font-mono text-xs font-bold text-white uppercase tracking-wider px-4" aria-hidden="true">
-          {content}
-        </span>
+        {[...items, ...items, ...items, ...items].map((item, i) => (
+          <span 
+            key={i} 
+            className="font-mono text-xs font-bold text-white uppercase tracking-wider px-6"
+          >
+            {item}
+          </span>
+        ))}
       </motion.div>
     </div>
   );
-};
-
-export { MarqueeStrip };
+}
