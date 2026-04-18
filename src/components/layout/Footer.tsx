@@ -3,13 +3,14 @@ import Link from 'next/link';
 export function Footer() {
   return (
     <footer className="bg-surface border-t border-border">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-12 pt-20 pb-10">
-        <div className="pb-16">
-          <h2 className="font-sans text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[0.9] tracking-tight">
-            LET&apos;S BUILD <br />
-            <span style={{ color: 'var(--orange)' }}>SOMETHING.</span>
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-12 pt-32 pb-10">
+        <div className="pb-16 relative">
+          <h2 className="font-sans text-[clamp(3rem,8vw,7rem)] font-black leading-[0.85] tracking-tight">
+            BUILD <br />
+            SOMETHING<br />
+            <span style={{ color: 'var(--orange)' }}>UNREASONABLE.</span>
           </h2>
-          <div className="mt-8 flex flex-col gap-2">
+          <div className="mt-12 flex flex-col gap-2">
             <Link 
               href="mailto:admin@nerdev.in"
               className="font-mono text-lg text-orange hover:underline w-fit"

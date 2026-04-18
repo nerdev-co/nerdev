@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 interface BentoCardProps {
   label?: string;
   title: string;
@@ -28,10 +26,8 @@ export function BentoCard({
   href
 }: BentoCardProps) {
   const content = (
-    <motion.div
-      whileHover={{ y: -4, borderColor: 'var(--border-2)' }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
-      className={`bg-surface border border-border p-7 transition-all duration-200 ${
+    <div
+      className={`bg-surface border border-border p-7 transition-all duration-200 hover:-translate-y-2 hover:border-orange hover:shadow-[8px_8px_0_var(--orange)] ${
         span === 'wide' ? 'md:col-span-2' : ''
       } ${className}`}
     >
@@ -62,7 +58,7 @@ export function BentoCard({
         </div>
       )}
       {children}
-    </motion.div>
+    </div>
   );
 
   if (href) {

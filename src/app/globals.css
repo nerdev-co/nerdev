@@ -153,3 +153,26 @@ input, textarea, select {
 .animate-pulse-slow {
   animation: pulse 2s ease-in-out infinite;
 }
+
+/* Tier-based section padding */
+.section-tier-1 {
+  padding: 160px 0;
+}
+
+.section-tier-2 {
+  padding: 100px 0;
+}
+
+.section-tier-3 {
+  padding: 60px 0;
+  opacity: 0.8;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}

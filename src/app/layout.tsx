@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { AmbientBackground } from "@/components/ui/ambient-background";
 
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} ${spaceMono.variable}`}>
       <body className="min-h-screen flex flex-col bg-bg text-text antialiased">
         <CustomCursor />
+        <AmbientBackground />
         <Navbar />
         <main className="flex-1">
           {children}

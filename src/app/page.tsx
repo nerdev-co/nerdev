@@ -46,8 +46,8 @@ export default function Home() {
       variants={containerVariants}
       className="min-h-screen"
     >
-      {/* HERO SECTION */}
-      <section className="min-h-[100svh] flex flex-col lg:flex-row pt-24 pb-16 px-6 lg:px-12">
+      {/* HERO SECTION - TIER 1 */}
+      <section className="section-tier-1 min-h-[100svh] flex flex-col lg:flex-row pt-24 pb-16 px-6 lg:px-12">
         <div className="max-w-[1200px] mx-auto w-full">
           <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 h-full">
             {/* LEFT COLUMN */}
