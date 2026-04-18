@@ -1,26 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="360" height="80">
-  <!-- Background (optional, remove if not needed) -->
   <rect width="100%" height="100%" fill="#0d0d0d"/>
 
-  <!-- Icon (cleaned N mark) -->
+  <!-- Icon -->
   <g transform="translate(10,10)">
-    <!-- Vertical bar -->
     <rect x="0" y="0" width="14" height="60" fill="#ededed"/>
-    
-    <!-- Curved top -->
     <path d="M14 0 H40 Q60 0 60 20 V30 H46 V20 Q46 12 40 12 H14 Z" fill="#ededed"/>
-    
-    <!-- Accent blocks -->
     <rect x="46" y="36" width="14" height="6" fill="#e85d04"/>
     <rect x="46" y="46" width="14" height="14" fill="#e85d04"/>
   </g>
 
-  <!-- Text -->
-  <g font-family="Space Mono, monospace" font-weight="700" font-size="52">
-    <!-- "ner" -->
-    <text x="90" y="55" fill="#ededed" letter-spacing="-1">ner</text>
-    
-    <!-- "dev" -->
-    <text x="210" y="55" fill="#e85d04" letter-spacing="2">dev</text>
-  </g>
+  <!-- Single word -->
+  <text x="90" y="55"
+        font-family="Space Mono, monospace"
+        font-weight="700"
+        font-size="52">
+    <tspan fill="#ededed">ner</tspan><tspan fill="#e85d04">dev</tspan>
+  </text>
 </svg>
