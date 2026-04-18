@@ -112,19 +112,21 @@ export default function AboutPage() {
           
           <div className="flex flex-wrap gap-4">
             <a 
-              href="#" 
+              href="https://github.com/nalindalal" 
+              target="_blank"
               className="flex items-center gap-3 px-4 py-3 bg-surface border border-border hover:border-orange transition-colors"
             >
               <Code2 className="w-5 h-5" />
-              <span className="font-mono text-sm">nalin</span>
+              <span className="font-mono text-sm">nalindalal</span>
               <ArrowUpRight className="w-4 h-4 text-text-3" />
             </a>
             <a 
-              href="#" 
+              href="https://github.com/samarth-na" 
+              target="_blank"
               className="flex items-center gap-3 px-4 py-3 bg-surface border border-border hover:border-orange transition-colors"
             >
               <Code2 className="w-5 h-5" />
-              <span className="font-mono text-sm">samarth</span>
+              <span className="font-mono text-sm">samarth-na</span>
               <ArrowUpRight className="w-4 h-4 text-text-3" />
             </a>
           </div>
