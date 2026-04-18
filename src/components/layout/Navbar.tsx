@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { ScrambleLink } from '@/components/ui/scramble-link';
 
 const navLinks = [
   { href: '/', label: 'HOME' },
@@ -41,16 +42,15 @@ export function Navbar() {
           
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map(link => (
-              <Link
+              <ScrambleLink
                 key={link.href}
                 href={link.href}
-                className={`font-mono text-xs tracking-wider transition-colors hover:text-orange ${
+                className={`font-mono text-xs tracking-wider transition-colors ${
                   activePath === link.href ? 'text-orange' : 'text-text-2'
                 }`}
               >
-                {activePath === link.href && <span className="mr-1">●</span>}
-                {link.label}
-              </Link>
+                {activePath === link.href ? `● ${link.label}` : link.label}
+              </ScrambleLink>
             ))}
           </div>
 
