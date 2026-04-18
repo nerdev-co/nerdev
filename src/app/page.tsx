@@ -130,8 +130,9 @@ export default function Home() {
                       <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
                       <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
                       <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+                      <span className="font-mono text-xs text-text-3 ml-2">nerdev.ts</span>
                     </div>
-                    <span className="font-mono text-xs text-text-3">nerdev.ts</span>
+                    <span className="font-mono text-[9px] text-orange bg-orange-dim px-2 py-0.5">LIVE</span>
                   </div>
                   <div className="p-5 font-mono text-xs leading-[1.9]">
                     <div>
@@ -154,9 +155,6 @@ export default function Home() {
                       <span className="text-blue">await</span> deploy(project.<span className="text-yellow">current</span>); <span className="text-orange cursor-blink">▋</span>
                     </div>
                   </div>
-                </div>
-                <div className="absolute top-2 right-2 font-mono text-[9px] text-orange bg-orange-dim px-2 py-0.5">
-                  LIVE
                 </div>
               </div>
             </motion.div>
