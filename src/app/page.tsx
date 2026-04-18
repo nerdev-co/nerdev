@@ -94,12 +94,13 @@ export default function Home() {
                 </Link>
               </div>
               
-              <motion.div variants={itemVariants} className="flex flex-wrap gap-2">
-                {techStack.map(tech => (
+              <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+                {techStack.map((tech, i) => (
                   <span 
                     key={tech}
-                    className="font-mono text-[10px] text-text-3 border border-border px-2.5 py-1.5 uppercase tracking-wider hover:border-orange hover:text-orange transition-all cursor-default"
+                    className="group font-mono text-[11px] tracking-[0.15em] px-4 py-1.5 flex items-center gap-2 border border-border hover:border-orange hover:text-orange transition-all cursor-default"
                   >
+                    <span className="w-1 h-1 rounded-full bg-text-3 group-hover:bg-orange" />
                     {tech}
                   </span>
                 ))}
