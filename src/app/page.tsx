@@ -61,9 +61,17 @@ export default function Home() {
                 </span>
               </div>
               
-              <h1 className="font-sans text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.9] tracking-tight mb-6">
+              <motion.h1 
+                className="font-sans text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.9] tracking-tight mb-6 relative cursor-default"
+                whileHover={{ skewX: -3 }}
+                transition={{ duration: 0.2 }}
+              >
                 <ScrambleText text="We build the software serious startups actually ship." />
-              </h1>
+                {/* Ghost text layer */}
+                <span className="absolute -top-[20%] -left-[5%] text-[clamp(5rem,15vw,12rem)] font-black text-text opacity-[0.03] pointer-events-none select-none whitespace-nowrap">
+                  NERDEV
+                </span>
+              </motion.h1>
               
               <p className="text-base text-text-2 leading-relaxed max-w-md mb-8">
                 nerdev is a two-person product engineering studio. 
