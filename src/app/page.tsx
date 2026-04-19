@@ -10,11 +10,11 @@ import { TechStackConfigurator } from '@/components/ui/tech-stack-configurator';
 import { projects } from '@/lib/projects';
 
 const services = [
-  { label: '// 01', title: 'Web Applications', description: 'Next.js, full-stack, SaaS, e-commerce. Production-ready from day one.', tags: ['Next.js', 'TypeScript', 'PostgreSQL'], price: 'FROM $2,000' },
-  { label: '// 02', title: 'AI Solutions', description: 'LLM integration, agents, automation, custom models that actually work.', tags: ['LLMs', 'LangChain', 'Python'], price: 'FROM $1,500' },
-  { label: '// 03', title: 'Mobile Apps', description: 'React Native, iOS + Android. One codebase, two platforms.', tags: ['React Native', 'iOS', 'Android'], price: 'FROM $3,000' },
-  { label: '// 04', title: 'API & Backend', description: 'REST, GraphQL, auth, infrastructure. The boring stuff done right.', tags: ['REST', 'GraphQL', 'AWS'], price: 'FROM $1,000' },
-  { label: '// 05', title: 'Full Builds', description: '0→1, end-to-end product. We own the whole thing.', tags: ['Strategy', 'Build', 'Ship'], price: 'FROM $5,000' },
+  { label: '// 01', title: 'Web Applications', description: 'Next.js, full-stack, SaaS, e-commerce. Production-ready from day one.', tags: ['Next.js', 'TypeScript', 'PostgreSQL'], price: 'FROM ₹1.5L' },
+  { label: '// 02', title: 'AI Solutions', description: 'LLM integration, agents, automation, custom models that actually work.', tags: ['LLMs', 'LangChain', 'Python'], price: 'FROM ₹1L' },
+  { label: '// 03', title: 'Mobile Apps', description: 'React Native, iOS + Android. One codebase, two platforms.', tags: ['React Native', 'iOS', 'Android'], price: 'FROM ₹2L' },
+  { label: '// 04', title: 'API & Backend', description: 'REST, GraphQL, auth, infrastructure. The boring stuff done right.', tags: ['REST', 'GraphQL', 'AWS'], price: 'FROM ₹75K' },
+  { label: '// 05', title: 'Full Builds', description: '0→1, end-to-end product. We own the whole thing.', tags: ['Strategy', 'Build', 'Ship'], price: 'FROM ₹3.5L' },
 ];
 
 const differentiators = [
@@ -186,35 +186,35 @@ export default function Home() {
               title="Web Applications"
               description="Next.js, full-stack, SaaS, e-commerce. Production-ready from day one."
               tags={['Next.js', 'TypeScript', 'PostgreSQL']}
-              price="FROM $2,000"
+              price="FROM ₹1.5L"
             />
             <BentoCard 
               label="// 02"
               title="AI Solutions"
               description="LLM integration, agents, automation, custom models that actually work."
               tags={['LLMs', 'LangChain', 'Python']}
-              price="FROM $1,500"
+              price="FROM ₹1L"
             />
             <BentoCard 
               label="// 03"
               title="Mobile Apps"
               description="React Native, iOS + Android. One codebase, two platforms."
               tags={['React Native', 'iOS', 'Android']}
-              price="FROM $3,000"
+              price="FROM ₹2L"
             />
             <BentoCard 
               label="// 04"
               title="API & Backend"
               description="REST, GraphQL, auth, infrastructure. The boring stuff done right."
               tags={['REST', 'GraphQL', 'AWS']}
-              price="FROM $1,000"
+              price="FROM ₹75K"
             />
             <BentoCard 
               label="// 05"
               title="Full Builds"
               description="0→1, end-to-end product. We own the whole thing."
               tags={['Strategy', 'Build', 'Ship']}
-              price="FROM $5,000"
+              price="FROM ₹3.5L"
             />
             <Link href="/contact" className="block">
               <BentoCard
@@ -279,34 +279,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-surface">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="mb-12">
-            <span className="font-mono text-xs text-text-3 tracking-wider uppercase">// WORDS FROM CLIENTS</span>
-            <h2 className="font-sans text-3xl lg:text-4xl font-black mt-4 leading-tight">
-              Don't take our word for it.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-bg border border-border p-6">
-              <p className="text-base text-text-2 italic mb-6">"nerdev didn't just build our product—they understood the vision. Delivered in 6 weeks what other shops promised in 6 months."</p>
-              <div className="border-t border-border pt-4">
-                <p className="font-bold">Sarah Chen</p>
-                <p className="font-mono text-xs text-text-3">CEO, Fintech Startup</p>
-              </div>
-            </div>
-            <div className="bg-bg border border-border p-6">
-              <p className="text-base text-text-2 italic mb-6">"Finally, developers who actually ship. No scope creep, no drama. Just clean code and on-time delivery. Already hiring them for round two."</p>
-              <div className="border-t border-border pt-4">
-                <p className="font-bold">Marcus Webb</p>
-                <p className="font-mono text-xs text-text-3">Founder, Logistics Platform</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       
       {/* TECH STACK CONFIGURATOR */}
       <section className="py-20 lg:py-32 px-6 lg:px-12 bg-surface">

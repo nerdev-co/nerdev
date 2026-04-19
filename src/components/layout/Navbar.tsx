@@ -72,6 +72,32 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      {isOpen && (
+        <div className="lg:hidden bg-bg border-b border-border">
+          <div className="px-6 py-4 space-y-3">
+            {navLinks.map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`block font-mono text-xs tracking-wider py-2 ${
+                  activePath === link.href ? 'text-orange' : 'text-text-2'
+                }`}
+              >
+                {activePath === link.href ? `● ${link.label}` : link.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-center py-3 bg-orange text-white font-mono text-xs font-bold uppercase tracking-wider"
+            >
+              Start a project →
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

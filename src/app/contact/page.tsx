@@ -25,19 +25,30 @@ const infoCards = [
 ];
 
 const budgetOptions = [
-  { value: 'under-1k', label: '< $1,000' },
-  { value: '1k-3k', label: '$1,000 – $3,000' },
-  { value: '3k-10k', label: '$3,000 – $10,000' },
-  { value: '10k-plus', label: '$10,000+' },
+  { value: 'under-75k', label: '< ₹75,000' },
+  { value: '75k-2.5l', label: '₹75,000 – ₹2.5L' },
+  { value: '2.5l-8l', label: '₹2.5L – ₹8L' },
+  { value: '8l-plus', label: '₹8L+' },
 ];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', budget: '', details: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error('Failed to submit:', err);
+    }
   };
 
   return (

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { projects, getProject } from '@/lib/projects';
 

@@ -8,17 +8,24 @@ interface TechStackConfiguratorProps {
 }
 
 const OPTIONS = [
-  { id: 'web', label: 'Web Application', price: 2000, default: true },
-  { id: 'mobile', label: 'Mobile App (iOS + Android)', price: 3000, default: false },
-  { id: 'ai', label: 'AI Integration', price: 1500, default: false },
-  { id: 'api', label: 'Custom API', price: 1000, default: false },
-  { id: 'auth', label: 'Authentication', price: 500, default: false },
-  { id: 'db', label: 'Database Architecture', price: 800, default: false },
+  { id: 'web', label: 'Web Application', price: 150000, default: true },
+  { id: 'mobile', label: 'Mobile App (iOS + Android)', price: 200000, default: false },
+  { id: 'ai', label: 'AI Integration', price: 100000, default: false },
+  { id: 'api', label: 'Custom API', price: 75000, default: false },
+  { id: 'auth', label: 'Authentication', price: 35000, default: false },
+  { id: 'db', label: 'Database Architecture', price: 55000, default: false },
 ];
 
 export function TechStackConfigurator({ className = '' }: TechStackConfiguratorProps) {
   const [selected, setSelected] = useState<string[]>(['web']);
   const [result, setResult] = useState<number | null>(null);
+
+  const formatPrice = (price: number) => {
+    if (price >= 100000) {
+      return `${(price / 100000).toFixed(1)}L`;
+    }
+    return `${(price / 1000).toFixed(0)}K`;
+  };
 
   const toggleOption = (id: string) => {
     if (id === 'web') return;
@@ -68,7 +75,7 @@ export function TechStackConfigurator({ className = '' }: TechStackConfiguratorP
                 <span className="font-mono text-sm text-text">{opt.label}</span>
               </div>
               <span className={`font-mono text-sm ${isSelected ? 'text-orange' : 'text-text-3'}`}>
-                {isSelected ? `$${opt.price.toLocaleString()}` : `+$${opt.price.toLocaleString()}`}
+                {isSelected ? `₹${formatPrice(opt.price)}` : `+₹${formatPrice(opt.price)}`}
               </span>
             </button>
           );
@@ -92,7 +99,7 @@ export function TechStackConfigurator({ className = '' }: TechStackConfiguratorP
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-sm text-text-3">ESTIMATED STARTING PRICE</span>
-              <span className="font-mono text-2xl text-orange">${result.toLocaleString()}</span>
+              <span className="font-mono text-2xl text-orange">₹{formatPrice(result)}</span>
             </div>
             <p className="mt-2 font-mono text-[11px] text-text-3">
               This is a starting estimate. Final scope determined in discovery call.
