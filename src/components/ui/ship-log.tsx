@@ -11,15 +11,7 @@ interface ShipLogEntry {
 
 export function ShipLog({ className = '' }: { className?: string }) {
   const [logs] = useState<ShipLogEntry[]>([
-    { date: '2026-04-12', status: 'DONE', description: 'Deployed SaaS Dashboard for Client_X' },
-    { date: '2026-04-10', status: 'DONE', description: 'Optimized PostgreSQL queries for fintech app' },
-    { date: '2026-04-08', status: 'DONE', description: 'Launched MVP for healthtech startup' },
-    { date: '2026-04-05', status: 'DONE', description: 'Built custom CMS for media company' },
-    { date: '2026-04-03', status: 'DONE', description: 'Integrated payment gateway for e-commerce' },
-    { date: '2026-04-01', status: 'DONE', description: 'Created AI-powered chatbot for customer support' },
-    { date: '2026-03-28', status: 'DONE', description: 'Redesigned corporate website for law firm' },
-    { date: '2026-03-25', status: 'DONE', description: 'Developed inventory management system' },
-    { date: '2026-03-20', status: 'DONE', description: 'Implemented real-time analytics dashboard' },
+    { date: '2026-04-26', status: 'DONE', description: 'Ready for new projects — inbox open' },
   ]);
 
   return (
