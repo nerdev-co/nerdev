@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </h1>
         
         <p className="font-mono text-xs text-text-3 mb-12">
-          {project.client} · {project.year}
+          {project.type === 'personal' ? 'Self-initiated' : project.client} · {project.year}
         </p>
         
         <div className="w-full h-px bg-border mb-12"></div>
@@ -70,14 +70,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         )}
         
         <div className="mb-12">
-          <h2 className="font-sans text-2xl font-bold mb-4">THE PROBLEM</h2>
+          <h2 className="font-sans text-2xl font-bold mb-4">
+            {project.type === 'personal' ? 'CONTEXT' : 'THE PROBLEM'}
+          </h2>
           <p className="text-base text-text-2 leading-relaxed">
             {project.problem}
           </p>
         </div>
         
         <div className="mb-12">
-          <h2 className="font-sans text-2xl font-bold mb-4">OUR APPROACH</h2>
+          <h2 className="font-sans text-2xl font-bold mb-4">
+            {project.type === 'personal' ? 'WHAT I BUILT' : 'OUR APPROACH'}
+          </h2>
           <div className="space-y-6">
             {project.approach.map((paragraph, i) => (
               <div 
@@ -113,12 +117,37 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </p>
         </div>
         
-        <Link 
-          href="/contact"
-          className="inline-flex items-center px-6 py-3 bg-orange text-white font-mono text-sm font-bold uppercase tracking-wider border border-orange shadow-[3px_3px_0_#b34500] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_#b34500] transition-all"
-        >
-          Start a similar project →
-        </Link>
+        {project.type === 'personal' && project.links ? (
+          <div className="flex flex-wrap gap-4">
+            {project.links.live && (
+              <a 
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 bg-orange text-white font-mono text-sm font-bold uppercase tracking-wider border border-orange shadow-[3px_3px_0_#b34500] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_#b34500] transition-all"
+              >
+                VIEW LIVE SITE →
+              </a>
+            )}
+            {project.links.github && (
+              <a 
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 bg-surface text-text font-mono text-sm font-bold uppercase tracking-wider border border-border hover:border-orange hover:text-orange transition-all"
+              >
+                GITHUB REPO →
+              </a>
+            )}
+          </div>
+        ) : (
+          <Link 
+            href="/contact"
+            className="inline-flex items-center px-6 py-3 bg-orange text-white font-mono text-sm font-bold uppercase tracking-wider border border-orange shadow-[3px_3px_0_#b34500] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_#b34500] transition-all"
+          >
+            Start a similar project →
+          </Link>
+        )}
       </div>
     </div>
   );

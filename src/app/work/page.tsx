@@ -2,6 +2,7 @@
 
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { projects } from '@/lib/projects';
 
 const containerVariants: Variants = {
@@ -30,31 +31,43 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
           className="aspect-[16/9] relative overflow-hidden"
           style={{ backgroundColor: project.accent }}
         >
-          <style jsx>{`
-            .grid-pattern {
-              background-image: 
-                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-              background-size: 24px 24px;
-            }
-            .ui-rect {
-              position: absolute;
-              background: rgba(255,255,255,0.1);
-              border: 1px solid rgba(255,255,255,0.15);
-            }
-          `}</style>
-          <div className="absolute inset-0 grid-pattern" />
-          <div className="absolute top-1/4 left-1/4 w-1/2 h-1/3 ui-rect" />
-          <div className="absolute top-1/3 right-1/4 w-1/3 h-1/2 ui-rect" />
-          <div className="absolute bottom-1/4 left-1/3 w-1/4 h-1/4 ui-rect" />
-          <div className="absolute bottom-1/3 right-1/3 w-8 h-8 rounded-full border-2 border-white/20" />
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          ) : (
+            <>
+              <style jsx>{`
+                .grid-pattern {
+                  background-image: 
+                    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+                  background-size: 24px 24px;
+                }
+                .ui-rect {
+                  position: absolute;
+                  background: rgba(255,255,255,0.1);
+                  border: 1px solid rgba(255,255,255,0.15);
+                }
+              `}</style>
+              <div className="absolute inset-0 grid-pattern" />
+              <div className="absolute top-1/4 left-1/4 w-1/2 h-1/3 ui-rect" />
+              <div className="absolute top-1/3 right-1/4 w-1/3 h-1/2 ui-rect" />
+              <div className="absolute bottom-1/4 left-1/3 w-1/4 h-1/4 ui-rect" />
+              <div className="absolute bottom-1/3 right-1/3 w-8 h-8 rounded-full border-2 border-white/20" />
+            </>
+          )}
         </div>
         <div className="p-6">
           <h3 className="font-sans text-xl font-bold mb-1 group-hover:text-orange transition-colors">
             {project.title}
           </h3>
           <p className="font-mono text-[10px] text-text-3 uppercase tracking-wider mb-3">
-            {project.client} · {project.year}
+            {project.type === 'personal' ? 'Personal Project' : project.client} · {project.year}
           </p>
           <p className="text-sm text-text-2 leading-relaxed mb-4">
             {project.description}

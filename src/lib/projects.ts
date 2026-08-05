@@ -11,9 +11,42 @@ export interface Project {
   stack: string[];
   outcome: string;
   metrics?: { label: string; value: string }[];
+  type?: 'client' | 'personal';
+  links?: { live?: string; github?: string };
+  image?: string;
 }
 
 export const projects: Project[] = [
+  {
+    slug: "modheshwari",
+    title: "Modheshwari",
+    client: "Self-initiated",
+    year: 2024,
+    tags: ["Community Platform", "Real-time", "Event Management"],
+    description: "Full-stack community management platform designed to support 10,000–15,000 members — covering events, resource requests, real-time notifications, and role-based governance.",
+    accent: "#8b5cf6",
+    problem: "Built to replace scattered spreadsheets, group chats, and manual follow-ups for a community organization. Needed to support family/member management, role-based governance, event approvals, resource requests, and real-time communication at scale.",
+    approach: [
+      "Designed and implemented the full architecture — backend API, WebSocket service, data model, authentication/authorization, async notification pipeline, and deployment/monitoring setup",
+      "Built an async notification pipeline (Kafka + Redis) so delivery never blocks the main API request path",
+      "Modeled multi-step, multi-approver approval workflows (events, resource requests) as stateful domain logic in Prisma",
+      "Built a WebSocket service for realtime chat/notifications that stays resilient across HTTP, Redis, Kafka, and DB dependencies",
+      "Set up CI/CD with GitHub Actions to build, test, and deploy Docker images to AWS ECR/ECS, with Prometheus and Grafana monitoring"
+    ],
+    stack: ["TypeScript", "Bun", "Next.js 15", "React 19", "Tailwind CSS", "Elysia", "Prisma ORM", "PostgreSQL", "Redis", "Kafka", "Docker Compose", "GitHub Actions", "Prometheus/Grafana", "Terraform"],
+    outcome: "Live, portfolio-ready platform with production-minded architecture. Designed for a 10–15k member community with async event pipelines, role-based workflow automation, and full CI/CD to AWS ECR/ECS.",
+    metrics: [
+      { label: "Designed Scale", value: "10–15k" },
+      { label: "Services", value: "3" },
+      { label: "Pipeline", value: "Async" }
+    ],
+    type: 'personal',
+    links: {
+      live: "https://modheshwari.nerdev.in/",
+      github: "https://github.com/nerdev-co/modheshwari"
+    },
+    image: "/modheshwari.png"
+  },
   {
     slug: "logistics-dashboard",
     title: "Fleet Command Center",
