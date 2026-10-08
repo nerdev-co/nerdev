@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 
 interface ScrambleLinkProps {
   href: string;
@@ -9,12 +10,13 @@ interface ScrambleLinkProps {
 }
 
 const CHARS = '!<>-_\\/[]{}—=+*^?#________';
+const TICK_MS = 30;
 
 export function ScrambleLink({ href, children, className = '' }: ScrambleLinkProps) {
-  const [display, setDisplay] = useState(children);
-  const [isScrambling, setIsScrambling] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const text = typeof children === 'string' ? children : '';
+  const [display, setDisplay] = useState(text);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const iterationsRef = useRef(0);
 
   useEffect(() => {
     return () => {
@@ -22,46 +24,52 @@ export function ScrambleLink({ href, children, className = '' }: ScrambleLinkPro
     };
   }, []);
 
-  const handleMouseEnter = () => {
-    if (!text) return;
-    setIsScrambling(true);
-    
-    let iteration = 0;
-    const originalText = text;
-    
-    intervalRef.current = setInterval(() => {
-      setDisplay(
-        originalText
-          .split('')
-          .map((char, i) => {
-            if (i < iteration) return char;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join('')
-      );
-      
-      if (iteration >= originalText.length) {
-        setIsScrambling(false);
-        if (intervalRef.current) clearInterval(intervalRef.current);
-      }
-      iteration += 1 / 3;
-    }, 30);
+  const stop = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    setDisplay(text);
   };
 
-  const handleMouseLeave = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    setDisplay(text);
-    setIsScrambling(false);
+  const handleMouseEnter = () => {
+    if (!text || intervalRef.current) return;
+
+    iterationsRef.current = 0;
+    const total = text.length;
+
+    intervalRef.current = setInterval(() => {
+      const resolved = Math.floor(iterationsRef.current);
+
+      setDisplay(
+        text
+          .split('')
+          .map((char, i) =>
+            i < resolved ? char : CHARS[Math.floor(Math.random() * CHARS.length)]
+          )
+          .join('')
+      );
+
+      iterationsRef.current += 1 / 3;
+
+      if (iterationsRef.current >= total) {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+        setDisplay(text);
+      }
+    }, TICK_MS);
   };
 
   return (
-    <a 
-      href={href} 
+    <Link
+      href={href}
       className={className}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={stop}
     >
       {display}
-    </a>
+    </Link>
   );
 }

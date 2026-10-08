@@ -2,29 +2,32 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { ScrambleLink } from '@/components/ui/scramble-link';
 
 const navLinks = [
-  { href: '/', label: 'HOME' },
   { href: '/work', label: 'WORK' },
-  { href: '/about', label: 'ABOUT' },
+  { href: '/products', label: 'PRODUCTS' },
   { href: '/process', label: 'PROCESS' },
+  { href: '/about', label: 'ABOUT' },
+  { href: '/company', label: 'COMPANY' },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activePath, setActivePath] = useState('/');
+  const activePath = usePathname();
 
   useEffect(() => {
-    setActivePath(window.location.pathname);
-    
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isActive = (href: string) => activePath === href;
 
   return (
     <nav 
@@ -37,7 +40,7 @@ export function Navbar() {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
-            <img src="/logo.svg" alt="nerdev" className="h-7 w-auto" />
+            <Image src="/logo.svg" alt="nerdev" width={112} height={28} priority />
           </Link>
           
           <div className="hidden lg:flex items-center gap-8">
@@ -46,10 +49,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`font-mono text-xs tracking-wider transition-colors ${
-                  activePath === link.href ? 'text-orange' : 'text-text-2'
+                  isActive(link.href) ? 'text-orange' : 'text-text-2'
                 }`}
               >
-                {activePath === link.href ? `● ${link.label}` : link.label}
+                {isActive(link.href) ? `● ${link.label}` : link.label}
               </ScrambleLink>
             ))}
           </div>
@@ -82,10 +85,10 @@ export function Navbar() {
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={`block font-mono text-xs tracking-wider py-2 ${
-                  activePath === link.href ? 'text-orange' : 'text-text-2'
+                  isActive(link.href) ? 'text-orange' : 'text-text-2'
                 }`}
               >
-                {activePath === link.href ? `● ${link.label}` : link.label}
+                {isActive(link.href) ? `● ${link.label}` : link.label}
               </Link>
             ))}
             <Link

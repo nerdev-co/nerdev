@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { company, socialLinks } from '@/lib/company';
 
 export function Footer() {
   return (
@@ -11,53 +12,57 @@ export function Footer() {
             <span style={{ color: 'var(--orange)' }}>UNREASONABLE.</span>
           </h2>
           <div className="mt-12 flex flex-col gap-2">
-            <Link 
-              href="mailto:admin@nerdev.in"
+            <Link
+              href={`mailto:${company.email}`}
               className="font-mono text-lg text-orange hover:underline w-fit"
             >
-              → admin@nerdev.in
+              → {company.email}
             </Link>
             <span className="font-mono text-xs text-text-3">
-              Open for new projects. Response within 24h. IST timezone.
+              Open for new projects. Response within 24h. {company.timezone}.
             </span>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pt-8 border-t border-border">
-          <span className="font-mono text-xs text-text-3">
-            © 2026 nerdev. All rights reserved.
-          </span>
-
-          <div className="flex items-center gap-6">
-            <a
-              href="https://github.com/nalindalal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-xs text-text-2 hover:text-orange transition-colors"
-            >
-              GITHUB
-            </a>
-            <a
-              href="https://twitter.com/nerdev_in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-xs text-text-2 hover:text-orange transition-colors"
-            >
-              TWITTER
-            </a>
-            <a
-              href="https://linkedin.com/company/nerdev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-xs text-text-2 hover:text-orange transition-colors"
-            >
-              LINKEDIN
-            </a>
+          <div className="space-y-1">
+            <span className="font-mono text-xs text-text-3">
+              © {new Date().getFullYear()} {company.copyrightHolder}
+            </span>
+            <span className="block font-mono text-[10px] text-text-3 opacity-70">
+              {company.entityType} · {company.jurisdiction}
+            </span>
           </div>
 
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-wider">
-            MADE BY US. OBVIOUSLY.
-          </span>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {socialLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-text-2 hover:text-orange transition-colors"
+              >
+                {link.label.toUpperCase()}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {[
+              { href: '/company', label: 'COMPANY' },
+              { href: '/legal/terms', label: 'TERMS' },
+              { href: '/legal/privacy', label: 'PRIVACY' },
+            ].map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="font-mono text-xs text-text-3 hover:text-orange transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

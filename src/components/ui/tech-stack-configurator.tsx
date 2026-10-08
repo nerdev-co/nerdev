@@ -3,29 +3,27 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { formatInrLakh, formatUsd } from '@/lib/pricing';
+
 interface TechStackConfiguratorProps {
   className?: string;
 }
 
+/** ₹ prices are primary; USD is a rounded secondary figure. */
+const USD_PER_INR = 0.012;
+
 const OPTIONS = [
-  { id: 'web', label: 'Web Application', price: 150000, default: true },
-  { id: 'mobile', label: 'Mobile App (iOS + Android)', price: 200000, default: false },
-  { id: 'ai', label: 'AI Integration', price: 100000, default: false },
-  { id: 'api', label: 'Custom API', price: 75000, default: false },
-  { id: 'auth', label: 'Authentication', price: 35000, default: false },
-  { id: 'db', label: 'Database Architecture', price: 55000, default: false },
+  { id: 'web', label: 'Web Application', price: 150000, locked: true },
+  { id: 'mobile', label: 'Mobile App (iOS + Android)', price: 200000, locked: false },
+  { id: 'ai', label: 'AI Integration', price: 100000, locked: false },
+  { id: 'api', label: 'Custom API', price: 75000, locked: false },
+  { id: 'auth', label: 'Authentication', price: 35000, locked: false },
+  { id: 'db', label: 'Database Architecture', price: 55000, locked: false },
 ];
 
 export function TechStackConfigurator({ className = '' }: TechStackConfiguratorProps) {
   const [selected, setSelected] = useState<string[]>(['web']);
   const [result, setResult] = useState<number | null>(null);
-
-  const formatPrice = (price: number) => {
-    if (price >= 100000) {
-      return `${(price / 100000).toFixed(1)}L`;
-    }
-    return `${(price / 1000).toFixed(0)}K`;
-  };
 
   const toggleOption = (id: string) => {
     if (id === 'web') return;
@@ -49,7 +47,7 @@ export function TechStackConfigurator({ className = '' }: TechStackConfiguratorP
       <div className="space-y-1">
         {OPTIONS.map((opt) => {
           const isSelected = selected.includes(opt.id);
-          const isDisabled = opt.id === 'web';
+          const isDisabled = opt.locked;
           
           return (
             <button
@@ -75,7 +73,9 @@ export function TechStackConfigurator({ className = '' }: TechStackConfiguratorP
                 <span className="font-mono text-sm text-text">{opt.label}</span>
               </div>
               <span className={`font-mono text-sm ${isSelected ? 'text-orange' : 'text-text-3'}`}>
-                {isSelected ? `₹${formatPrice(opt.price)}` : `+₹${formatPrice(opt.price)}`}
+                {isSelected
+                  ? formatInrLakh(opt.price)
+                  : `+${formatInrLakh(opt.price)}`}
               </span>
             </button>
           );
@@ -84,7 +84,7 @@ export function TechStackConfigurator({ className = '' }: TechStackConfiguratorP
 
       <button
         onClick={calculate}
-        className="w-full mt-4 py-3 bg-orange text-white font-mono text-sm font-bold uppercase tracking-wider border border-orange shadow-[3px_3px_0_#b34500] hover:x-[1.5px] hover:y-[1.5px] hover:shadow-[1.5px_1.5px_0_#b34500] transition-all"
+        className="w-full mt-4 py-3 bg-orange text-white font-mono text-sm font-bold uppercase tracking-wider border border-orange shadow-[3px_3px_0_#b34500] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_#b34500] transition-all"
       >
         Calculate
       </button>
@@ -97,12 +97,20 @@ export function TechStackConfigurator({ className = '' }: TechStackConfiguratorP
             exit={{ opacity: 0, y: -10 }}
             className="mt-4 pt-4 border-t border-orange"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-baseline justify-between gap-4">
               <span className="font-mono text-sm text-text-3">ESTIMATED STARTING PRICE</span>
-              <span className="font-mono text-2xl text-orange">₹{formatPrice(result)}</span>
+              <span className="font-mono text-2xl text-orange">{formatInrLakh(result)}</span>
             </div>
-            <p className="mt-2 font-mono text-[11px] text-text-3">
-              This is a starting estimate. Final scope determined in discovery call.
+            <div className="flex items-baseline justify-between gap-4 mt-1">
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-wider">
+                Approx. USD
+              </span>
+              <span className="font-mono text-xs text-text-2">
+                {formatUsd(Math.round(result * USD_PER_INR))}
+              </span>
+            </div>
+            <p className="mt-3 font-mono text-[11px] text-text-3">
+              Starting estimate only. Final scope and price are fixed in a written proposal.
             </p>
           </motion.div>
         )}

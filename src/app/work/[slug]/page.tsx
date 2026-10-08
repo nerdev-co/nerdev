@@ -1,14 +1,31 @@
 import Link from 'next/link';
-import { projects, getProject } from '@/lib/projects';
+import type { Metadata } from 'next';
+import { clientWork, products, getProject } from '@/lib/projects';
 
 export function generateStaticParams() {
-  return projects.map(p => ({ slug: p.slug }));
+  return [...clientWork, ...products].map(p => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProject(slug);
+
+  if (!project) return {};
+
+  return {
+    title: project.title,
+    description: project.description,
+  };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProject(slug);
-  
+
   if (!project) {
     return (
       <div className="min-h-screen pt-24 pb-20 px-6 lg:px-12 flex items-center justify-center">
@@ -20,19 +37,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     );
   }
 
+  const isProduct = project.type === 'product';
+  const backHref = isProduct ? '/products' : '/work';
+  const backLabel = isProduct ? '← BACK TO PRODUCTS' : '← BACK TO WORK';
+
   return (
     <div className="min-h-screen pt-24 pb-20 px-6 lg:px-12">
       <div className="max-w-[760px] mx-auto">
-        <Link 
-          href="/work" 
+        <Link
+          href={backHref}
           className="inline-flex items-center font-mono text-xs text-text-3 hover:text-orange transition-colors mb-8"
         >
-          ← BACK TO WORK
+          {backLabel}
         </Link>
-        
+
         <div className="flex flex-wrap gap-2 mb-6">
           {project.tags.map(tag => (
-            <span 
+            <span
               key={tag}
               className="font-mono text-[9px] text-text-3 border border-border px-2 py-1 uppercase tracking-wider"
             >
@@ -40,21 +61,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </span>
           ))}
         </div>
-        
+
         <h1 className="font-sans text-4xl lg:text-5xl font-black leading-[0.9] tracking-tight mb-4">
           {project.title}
         </h1>
-        
+
         <p className="font-mono text-xs text-text-3 mb-12">
-          {project.type === 'personal' ? 'Self-initiated' : project.client} · {project.year}
+          {isProduct ? `${project.client}${project.status ? ` · ${project.status}` : ''}` : project.client} · {project.year}
         </p>
-        
+
         <div className="w-full h-px bg-border mb-12"></div>
-        
+
         {project.metrics && (
           <div className="grid grid-cols-3 gap-4 mb-16">
             {project.metrics.map(metric => (
-              <div 
+              <div
                 key={metric.label}
                 className="text-center p-4 border border-border"
               >
@@ -68,23 +89,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             ))}
           </div>
         )}
-        
+
         <div className="mb-12">
           <h2 className="font-sans text-2xl font-bold mb-4">
-            {project.type === 'personal' ? 'CONTEXT' : 'THE PROBLEM'}
+            {isProduct ? 'WHY IT EXISTS' : 'THE PROBLEM'}
           </h2>
           <p className="text-base text-text-2 leading-relaxed">
             {project.problem}
           </p>
         </div>
-        
+
         <div className="mb-12">
           <h2 className="font-sans text-2xl font-bold mb-4">
-            {project.type === 'personal' ? 'WHAT I BUILT' : 'OUR APPROACH'}
+            {isProduct ? 'WHAT I BUILT' : 'OUR APPROACH'}
           </h2>
           <div className="space-y-6">
             {project.approach.map((paragraph, i) => (
-              <div 
+              <div
                 key={i}
                 className="pl-4 border-l-[3px] border-orange"
               >
@@ -95,12 +116,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             ))}
           </div>
         </div>
-        
+
         <div className="mb-12">
           <h2 className="font-sans text-2xl font-bold mb-4">TECH STACK USED</h2>
           <div className="flex flex-wrap gap-2">
             {project.stack.map(tech => (
-              <span 
+              <span
                 key={tech}
                 className="font-mono text-xs text-text-2 border border-border px-3 py-1.5"
               >
@@ -109,18 +130,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             ))}
           </div>
         </div>
-        
+
         <div className="mb-16">
           <h2 className="font-sans text-2xl font-bold mb-4">OUTCOME</h2>
           <p className="text-lg text-text leading-relaxed">
             {project.outcome}
           </p>
         </div>
-        
-        {project.type === 'personal' && project.links ? (
+
+        {isProduct && project.links ? (
           <div className="flex flex-wrap gap-4">
             {project.links.live && (
-              <a 
+              <a
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -130,7 +151,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               </a>
             )}
             {project.links.github && (
-              <a 
+              <a
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -141,7 +162,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             )}
           </div>
         ) : (
-          <Link 
+          <Link
             href="/contact"
             className="inline-flex items-center px-6 py-3 bg-orange text-white font-mono text-sm font-bold uppercase tracking-wider border border-orange shadow-[3px_3px_0_#b34500] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_#b34500] transition-all"
           >

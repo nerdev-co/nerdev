@@ -5,7 +5,10 @@ interface BentoCardProps {
   title: string;
   description?: string;
   tags?: string[];
+  /** Primary price line, always ₹. */
   price?: string;
+  /** Secondary currency line, e.g. "~ $1,800". */
+  priceSecondary?: string;
   children?: React.ReactNode;
   span?: 'normal' | 'wide';
   className?: string;
@@ -13,12 +16,13 @@ interface BentoCardProps {
   href?: string;
 }
 
-export function BentoCard({ 
-  label, 
-  title, 
-  description, 
-  tags, 
-  price, 
+export function BentoCard({
+  label,
+  title,
+  description,
+  tags,
+  price,
+  priceSecondary,
   children,
   span = 'normal',
   className = '',
@@ -27,7 +31,7 @@ export function BentoCard({
 }: BentoCardProps) {
   const content = (
     <div
-      className={`bg-surface border border-border p-7 transition-all duration-200 hover:-translate-y-2 hover:border-orange hover:shadow-[8px_8px_0_var(--orange)] ${
+      className={`bg-surface border border-border p-7 transition-transform duration-200 hover:-translate-y-2 hover:border-orange hover:shadow-[8px_8px_0_var(--orange)] ${
         span === 'wide' ? 'md:col-span-2' : ''
       } ${className}`}
     >
@@ -43,7 +47,7 @@ export function BentoCard({
       {tags && (
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map(tag => (
-            <span 
+            <span
               key={tag}
               className="font-mono text-[10px] text-text-3 border border-border px-2 py-1 uppercase tracking-wider"
             >
@@ -52,9 +56,14 @@ export function BentoCard({
           ))}
         </div>
       )}
-      {price && (
-        <div className="pt-4 border-t border-border">
-          <span className="font-mono text-sm text-orange">{price}</span>
+      {(price || priceSecondary) && (
+        <div className="pt-4 border-t border-border flex items-baseline gap-3">
+          {price && <span className="font-mono text-sm text-orange">{price}</span>}
+          {priceSecondary && (
+            <span className="font-mono text-[10px] text-text-3 uppercase tracking-wider">
+              {priceSecondary}
+            </span>
+          )}
         </div>
       )}
       {children}

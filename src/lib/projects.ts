@@ -11,42 +11,13 @@ export interface Project {
   stack: string[];
   outcome: string;
   metrics?: { label: string; value: string }[];
-  type?: 'client' | 'personal';
-  links?: { live?: string; github?: string };
+  type: 'client' | 'product';
+  status?: 'Live' | 'Private beta' | 'In development' | 'Archived';
+  links?: { live?: string; github?: string; docs?: string };
   image?: string;
 }
 
 export const projects: Project[] = [
-  {
-    slug: "modheshwari",
-    title: "Modheshwari",
-    client: "Self-initiated",
-    year: 2024,
-    tags: ["Community Platform", "Real-time", "Event Management"],
-    description: "Full-stack community management platform designed to support 10,000–15,000 members — covering events, resource requests, real-time notifications, and role-based governance.",
-    accent: "#8b5cf6",
-    problem: "Built to replace scattered spreadsheets, group chats, and manual follow-ups for a community organization. Needed to support family/member management, role-based governance, event approvals, resource requests, and real-time communication at scale.",
-    approach: [
-      "Designed and implemented the full architecture — backend API, WebSocket service, data model, authentication/authorization, async notification pipeline, and deployment/monitoring setup",
-      "Built an async notification pipeline (Kafka + Redis) so delivery never blocks the main API request path",
-      "Modeled multi-step, multi-approver approval workflows (events, resource requests) as stateful domain logic in Prisma",
-      "Built a WebSocket service for realtime chat/notifications that stays resilient across HTTP, Redis, Kafka, and DB dependencies",
-      "Set up CI/CD with GitHub Actions to build, test, and deploy Docker images to AWS ECR/ECS, with Prometheus and Grafana monitoring"
-    ],
-    stack: ["TypeScript", "Bun", "Next.js 15", "React 19", "Tailwind CSS", "Elysia", "Prisma ORM", "PostgreSQL", "Redis", "Kafka", "Docker Compose", "GitHub Actions", "Prometheus/Grafana", "Terraform"],
-    outcome: "Live, portfolio-ready platform with production-minded architecture. Designed for a 10–15k member community with async event pipelines, role-based workflow automation, and full CI/CD to AWS ECR/ECS.",
-    metrics: [
-      { label: "Designed Scale", value: "10–15k" },
-      { label: "Services", value: "3" },
-      { label: "Pipeline", value: "Async" }
-    ],
-    type: 'personal',
-    links: {
-      live: "https://modheshwari.nerdev.in/",
-      github: "https://github.com/nerdev-co/modheshwari"
-    },
-    image: "/modheshwari.png"
-  },
   {
     slug: "logistics-dashboard",
     title: "Fleet Command Center",
@@ -69,7 +40,8 @@ export const projects: Project[] = [
       { label: "Vehicles Tracked", value: "200+" },
       { label: "Support Tickets", value: "-60%" },
       { label: "Fuel Savings", value: "18%" }
-    ]
+    ],
+    type: 'client',
   },
   {
     slug: "fintech-ai-agent",
@@ -81,7 +53,7 @@ export const projects: Project[] = [
     accent: "#3a86ff",
     problem: "The client's wealth management service had 10,000+ clients but only 3 advisors. New clients waited 3+ weeks for initial consultations. They needed a way to scale advisory services without hiring more humans.",
     approach: [
-      "Built an LLM-powered research agent that monitors market data, news, and财报",
+      "Built an LLM-powered research agent that monitors market data and news",
       "Created personalized portfolio recommendations based on risk tolerance and goals",
       "Implemented human-in-the-loop approval for all trades with full audit trail",
       "Added conversational interface for client questions about their portfolio",
@@ -93,7 +65,8 @@ export const projects: Project[] = [
       { label: "Onboarding Time", value: "3min" },
       { label: "Advisor Output", value: "15x" },
       { label: "Satisfaction", value: "4.8/5" }
-    ]
+    ],
+    type: 'client',
   },
   {
     slug: "ecommerce-platform",
@@ -117,10 +90,48 @@ export const projects: Project[] = [
       { label: "Cart Abandonment", value: "-73%" },
       { label: "Revenue", value: "3x" },
       { label: "AOV Increase", value: "35%" }
-    ]
-  }
+    ],
+    type: 'client',
+  },
 ];
 
+/** Client work. Case studies we can talk about publicly. */
+export const products: Project[] = [
+  {
+    slug: "modheshwari",
+    title: "Modheshwari",
+    client: "nerdev product",
+    year: 2024,
+    tags: ["Community Platform", "Real-time", "Event Management"],
+    description: "Full-stack community management platform built and owned by nerdev — events, resource requests, real-time notifications, and role-based governance at community scale.",
+    accent: "#8b5cf6",
+    problem: "Built to replace scattered spreadsheets, group chats, and manual follow-ups for a community organization. Needed to support family/member management, role-based governance, event approvals, resource requests, and real-time communication at scale.",
+    approach: [
+      "Designed and implemented the full architecture — backend API, WebSocket service, data model, authentication/authorization, async notification pipeline, and deployment/monitoring setup",
+      "Built an async notification pipeline (Kafka + Redis) so delivery never blocks the main API request path",
+      "Modeled multi-step, multi-approver approval workflows (events, resource requests) as stateful domain logic in Prisma",
+      "Built a WebSocket service for realtime chat/notifications that stays resilient across HTTP, Redis, Kafka, and DB dependencies",
+      "Set up CI/CD with GitHub Actions to build, test, and deploy Docker images to AWS ECR/ECS, with Prometheus and Grafana monitoring",
+    ],
+    stack: ["TypeScript", "Bun", "Next.js 15", "React 19", "Tailwind CSS", "Elysia", "Prisma ORM", "PostgreSQL", "Redis", "Kafka", "Docker Compose", "GitHub Actions", "Prometheus/Grafana", "Terraform"],
+    outcome: "Live platform with production-minded architecture. Designed for a 10–15k member community with async event pipelines, role-based workflow automation, and full CI/CD to AWS ECR/ECS.",
+    metrics: [
+      { label: "Designed Scale", value: "10–15k" },
+      { label: "Services", value: "3" },
+      { label: "Pipeline", value: "Async" },
+    ],
+    type: 'product',
+    status: 'Live',
+    links: {
+      live: "https://modheshwari.nerdev.in/",
+      github: "https://github.com/nerdev-co/modheshwari",
+    },
+    image: "/modheshwari.png",
+  },
+];
+
+export const clientWork = projects.filter(p => p.type === 'client');
+
 export function getProject(slug: string): Project | undefined {
-  return projects.find(p => p.slug === slug);
+  return [...projects, ...products].find(p => p.slug === slug);
 }
